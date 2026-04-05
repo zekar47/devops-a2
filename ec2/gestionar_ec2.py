@@ -16,10 +16,14 @@ def gestionar():
         accion = sys.argv[1].lower()
         instance_id = sys.argv[2] if len(sys.argv) > 2 else None
 
+    instancias = list(ec2.instances.all())
     try:
         if accion == "listar":
-            for instance in ec2.instances.all():
-                print(f"ID: {instance.id} | Estado: {instance.state['Name']}")
+            if instancias:
+                for instance in ec2.instances.all():
+                    print(f"ID: {instance.id} | Estado: {instance.state['Name']}")
+            else:
+                print("No se encontraron instancias EC2")
 
         elif accion in ["iniciar", "detener", "terminar"]:
             if not instance_id:
