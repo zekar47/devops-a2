@@ -21,7 +21,7 @@ def gestionar():
             for instance in ec2.instances.all():
                 print(f"ID: {instance.id} | Estado: {instance.state['Name']}")
 
-        elif accion in ["iniciar", "detener"]:
+        elif accion in ["iniciar", "detener", "terminar"]:
             if not instance_id:
                 print(f"Error: La acción '{accion}' requiere un ID de instancia.")
                 return
@@ -32,6 +32,8 @@ def gestionar():
                 instance.start()
             elif accion == "detener":
                 instance.stop()
+            elif accion == "terminar":
+                instance.terminate()
 
             print(f"Ejecutando '{accion}' en {instance_id}...")
         else:
