@@ -21,23 +21,21 @@ def gestionar():
             for instance in ec2.instances.all():
                 print(f"ID: {instance.id} | Estado: {instance.state['Name']}")
 
-        elif accion == "iniciar":
+        elif accion in ["iniciar", "detener"]:
             if not instance_id:
-                return print("Error: Se requiere ID de instancia")
-            instance = ec2.Instance(instance_id)
-            instance.start()
-            print(f"Instancia {instance_id} puesta en marcha.")
+                print(f"Error: La acción '{accion}' requiere un ID de instancia.")
+                return
 
-        elif accion == "detener":
-            if not instance_id:
-                return print("Error: Se requiere ID de instancia")
             instance = ec2.Instance(instance_id)
-            instance.stop()
-            print(f"Instancia {instance_id} detenida.")
 
+            if accion == "iniciar":
+                instance.start()
+            elif accion == "detener":
+                instance.stop()
+
+            print(f"Ejecutando '{accion}' en {instance_id}...")
         else:
             print(f"Acción '{accion}' no reconocida.")
-            print("Uso: ./gestionar_ec2.py <accion> [instance_id]")
 
     except ClientError as e:
         print(f"Error de AWS: {e}")
