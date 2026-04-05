@@ -7,14 +7,14 @@ from botocore.exceptions import ClientError
 
 def gestionar():
     ec2 = boto3.resource("ec2")
+    accion = ""
 
     # Check if the user provided an action (listar, iniciar, etc.)
     if len(sys.argv) < 2:
-        print("Uso: python3 gestionar_ec2.py <accion> [instance_id]")
-        return
-
-    accion = sys.argv[1].lower()
-    instance_id = sys.argv[2] if len(sys.argv) > 2 else None
+        accion = "listar"
+    else:
+        accion = sys.argv[1].lower()
+        instance_id = sys.argv[2] if len(sys.argv) > 2 else None
 
     try:
         if accion == "listar":
@@ -24,6 +24,7 @@ def gestionar():
         # Placeholder for future actions
         else:
             print(f"Acción '{accion}' no reconocida.")
+            print("Uso: ./gestionar_ec2.py <accion> [instance_id]")
 
     except ClientError as e:
         print(f"Error de AWS: {e}")
