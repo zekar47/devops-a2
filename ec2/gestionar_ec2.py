@@ -28,6 +28,13 @@ def gestionar():
             instance.start()
             print(f"Instancia {instance_id} puesta en marcha.")
 
+        elif accion == "detener":
+            if not instance_id:
+                return print("Error: Se requiere ID de instancia")
+            instance = ec2.Instance(instance_id)
+            instance.stop()
+            print(f"Instancia {instance_id} detenida.")
+
         else:
             print(f"Acción '{accion}' no reconocida.")
             print("Uso: ./gestionar_ec2.py <accion> [instance_id]")
