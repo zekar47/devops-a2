@@ -19,8 +19,7 @@ Este proyecto implementa una solución de automatización en AWS que integra la 
 ## 🌿 Flujo de Git (Branching)
 Se siguió una estrategia de ramas para garantizar la estabilidad del código:
 1. `feature/*`: Desarrollo de funcionalidades individuales.
-2. `develop`: Integración de características y pruebas.
-3. `main`: Versión estable y entregable.
+2. `main`: Versión estable y entregable.
 
 ## 🚀 Instrucciones de Uso
 
