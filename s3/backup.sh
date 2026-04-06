@@ -21,7 +21,16 @@ mkdir -p "$(dirname "$LOG_FILE")"
     echo "[$FECHA] Comprimiendo $DIRECTORIO..."
     if tar -czf "$TMP_FILE" "$DIRECTORIO"; then
         echo "[$FECHA] Éxito: Compresión exitosa."
-        echo "$TMP_FILE"
+
+        echo "[$FECHA] Subiendo a s3://$BUCKET..."
+        if aws s3 cp "$TMP_FILE" "s3://$BUCKET/"; then
+            echo "[$FECHA] Éxito: Backup completado."
+            rm "$TMP_FILE"
+        else
+            echo "[$FECHA] Error: Falló la subida a S3."
+            rm "$TMP_FILE"
+            exit 1
+        fi
     else
         echo "[$FECHA] Error: Falló la compresión."
         exit 1
