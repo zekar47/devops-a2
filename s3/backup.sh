@@ -3,6 +3,8 @@
 # Definir el archivo de log
 REPO_ROOT=$(cd "$(dirname "$0")/.." && pwd)
 LOG_FILE="$REPO_ROOT/logs/s3.log"
+FECHA="$(date +%Y%m%d_%H%M%S)"
+TMP_FILE="$(mktemp)"
 mkdir -p "$(dirname "$LOG_FILE")"
 
 {
@@ -16,7 +18,12 @@ mkdir -p "$(dirname "$LOG_FILE")"
     exit 1
   fi
 
-  # Simulación de comando
-  echo "Respaldando $DIRECTORIO en $BUCKET"
+  echo "[$FECHA] Comprimiendo $DIRECTORIO..."
+  if tar -czf "$TMP_FILE" "$DIRECTORIO"; then
+    echo "[$FECHA] Éxito: Compresión exitosa."
+    echo "$TMP_FILE"
+  else
+    echo "[$FECHA] Error: Falló la compresión."
+  fi
 
 } 2>&1 | tee -a "$LOG_FILE"
