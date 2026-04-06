@@ -1,7 +1,7 @@
 # 🚀 Proyecto AWS DevOps: Automatización y Despliegue Controlado
 
 ## 🎯 Descripción del Proyecto
-Este proyecto implementa una solución de automatización en AWS que integra la gestión de instancias EC2 mediante Python (Boto3) y el respaldo de datos en S3 mediante scripts POSIX Shell. El objetivo es simular un flujo de trabajo CI/CD donde la infraestructura y los datos se gestionan de forma programática y segura.
+Este proyecto implementa una solución de automatización en AWS que integra la gestión de instancias EC2 mediante Python (Boto3) y el respaldo de datos en S3 mediante scripts. El objetivo es simular un flujo de trabajo CI/CD donde la infraestructura y los datos se gestionan de forma programática y segura.
 
 ## 🛠️ Requisitos del Entorno
 - **AWS CLI**: Configurado con credenciales de Learner Lab.
